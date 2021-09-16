@@ -1,8 +1,8 @@
 package service
 
 import (
-	"git.dev.enbrands.com/scrm/bed/scrm/api/auth/v1/account"
-	svcv1a "git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/service/v1/account"
+	"github.com/china-xs/kratos-tpl/api/v1/account"
+	svcv1a "github.com/china-xs/kratos-tpl/internal/service/v1/account"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 	"github.com/google/wire"

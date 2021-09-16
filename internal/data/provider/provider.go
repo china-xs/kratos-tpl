@@ -1,9 +1,9 @@
 package provider
 
 import (
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/account"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/good"
+	"github.com/china-xs/kratos-tpl/internal/data"
+	"github.com/china-xs/kratos-tpl/internal/data/account"
+	"github.com/china-xs/kratos-tpl/internal/data/good"
 	"github.com/google/wire"
 )
 

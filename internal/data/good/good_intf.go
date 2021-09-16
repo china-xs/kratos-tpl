@@ -2,7 +2,7 @@ package good
 
 import (
 	"context"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data"
+	"github.com/china-xs/kratos-tpl/internal/data"
 	"github.com/go-kratos/kratos/v2/log"
 )
 

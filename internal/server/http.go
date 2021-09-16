@@ -1,8 +1,8 @@
 package server
 
 import (
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/conf"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/service"
+	"github.com/china-xs/kratos-tpl/internal/conf"
+	"github.com/china-xs/kratos-tpl/internal/service"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/logging"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"

@@ -8,7 +8,7 @@ server:
 data:
   database:
     driver: mysql
-    source: prod:Prodc959ed5e61ce4451803Enbrands@tcp(127.0.0.1:3308)/yjf_scrm
+    source: db_user:db_pass@tcp(192.168.56.12:3306)/kratos
   redis:
     addr: 127.0.0.1:6379
     read_timeout: 0.2s

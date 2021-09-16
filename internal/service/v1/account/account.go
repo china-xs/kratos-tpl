@@ -2,10 +2,10 @@ package service
 
 import (
 	"context"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/biz/account"
+	"github.com/china-xs/kratos-tpl/internal/biz/account"
 	"github.com/go-kratos/kratos/v2/log"
 
-	pb "git.dev.enbrands.com/scrm/bed/scrm/api/auth/v1/account"
+	pb "github.com/china-xs/kratos-tpl/api/v1/account"
 )
 
 type AccountService struct {

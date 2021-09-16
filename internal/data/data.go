@@ -1,7 +1,7 @@
 package data
 
 import (
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/conf"
+	"github.com/china-xs/kratos-tpl/internal/conf"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-redis/redis/extra/redisotel"
 	"github.com/go-redis/redis/v8"
@@ -21,9 +21,9 @@ import (
 
 // Data .
 type Data struct {
-	db  *gorm.DB
-	rdb *redis.Client
-	log log.Helper
+	DB  *gorm.DB
+	RDB *redis.Client
+	Log log.Helper
 	// TODO wrapped database client
 }
 
@@ -58,8 +58,8 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 	rdb.AddHook(redisotel.TracingHook{})
 
 	return &Data{
-		db:  db,
-		rdb: rdb,
-		log: *log.NewHelper(logger),
+		DB:  db,
+		RDB: rdb,
+		Log: *log.NewHelper(logger),
 	}, cleanup, nil
 }

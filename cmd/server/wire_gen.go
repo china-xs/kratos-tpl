@@ -6,14 +6,14 @@
 package main
 
 import (
-	account2 "git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/biz/account"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/conf"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/account"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/good"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/server"
-	service2 "git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/service"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/service/v1/account"
+	account2 "github.com/china-xs/kratos-tpl/internal/biz/account"
+	"github.com/china-xs/kratos-tpl/internal/conf"
+	"github.com/china-xs/kratos-tpl/internal/data"
+	"github.com/china-xs/kratos-tpl/internal/data/account"
+	"github.com/china-xs/kratos-tpl/internal/data/good"
+	"github.com/china-xs/kratos-tpl/internal/server"
+	service2 "github.com/china-xs/kratos-tpl/internal/service"
+	"github.com/china-xs/kratos-tpl/internal/service/v1/account"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 )

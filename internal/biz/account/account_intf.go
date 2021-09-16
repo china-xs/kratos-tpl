@@ -2,8 +2,8 @@ package account
 
 import (
 	"context"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/account"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/good"
+	"github.com/china-xs/kratos-tpl/internal/data/account"
+	"github.com/china-xs/kratos-tpl/internal/data/good"
 	"github.com/go-kratos/kratos/v2/log"
 )
 

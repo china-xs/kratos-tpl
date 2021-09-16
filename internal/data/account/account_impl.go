@@ -2,8 +2,8 @@ package account
 
 import (
 	"context"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/dao/model"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/dao/query"
+	"github.com/china-xs/kratos-tpl/internal/data/dao/model"
+	"github.com/china-xs/kratos-tpl/internal/data/dao/query"
 )
 
 // table account repo implement
@@ -18,7 +18,7 @@ func (this accountRepo) Create(ctx context.Context, create AccountCreate) (int32
 		Mobile:   create.Mobile,
 		Password: create.Password,
 	}
-	db := this.data.db.WithContext(ctx)
+	db := this.data.DB.WithContext(ctx)
 	//Account.Omit("code") 不更新|写入 code
 	//Account.Select("code", "Username") 指定更新字段
 	err := query.Use(db).Account.Create(&account)

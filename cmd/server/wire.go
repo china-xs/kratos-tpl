@@ -6,13 +6,12 @@ package main
 
 import (
 	// provider
-	pd_biz "git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/biz/provider"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/conf"
-	pd_data "git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/provider"
-	pd_srv "git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/server"
-	pd_svc "git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/service/provider"
+	pd_biz "github.com/china-xs/kratos-tpl/internal/biz/provider"
+	"github.com/china-xs/kratos-tpl/internal/conf"
+	pd_data "github.com/china-xs/kratos-tpl/internal/data/provider"
+	pd_srv "github.com/china-xs/kratos-tpl/internal/server"
+	pd_svc "github.com/china-xs/kratos-tpl/internal/service/provider"
 
-	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 )

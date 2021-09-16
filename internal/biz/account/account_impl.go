@@ -3,7 +3,7 @@ package account
 // account implement 接口实现
 import (
 	"context"
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/data/account"
+	"github.com/china-xs/kratos-tpl/internal/data/account"
 )
 
 func (this Logic) Create(ctx context.Context, create AccountLogicCreate) (int32, error) {

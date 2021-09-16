@@ -2,15 +2,13 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	"git.dev.enbrands.com/scrm/bed/scrm/pkg/logger"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/sdk/resource"
 	traceSDK "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"os"
 
-	"git.dev.enbrands.com/scrm/bed/scrm/app/auth/internal/conf"
+	"github.com/china-xs/kratos-tpl/internal/conf"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
@@ -22,7 +20,7 @@ import (
 // go build -ldflags "-X main.Version=x.y.z"
 var (
 	// Name is the name of the compiled software.
-	Name = "scrm-auth-权限管理"
+	Name = "微服务-单体tpl"
 	// Version is the version of the compiled software.
 	Version = "0.0.0.1"
 	// flagconf is the config flag.
@@ -53,14 +51,15 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server) *kratos.App {
 func main() {
 	flag.Parse()
 	//zap 实现kratos logs Logger
-	lg := logger.NewJSONLogger(
-		logger.WithDisableConsole(),
-		logger.WithField("domain", fmt.Sprintf("%s[%s][%s]", Name, Version, id)),
-		logger.WithTimeLayout("2006-01-02 15:04:05"),
-		logger.WithFileRotationP(LogPath),
-	)
+	//lg := logger.NewJSONLogger(
+	//	logger.WithDisableConsole(),
+	//	logger.WithField("domain", fmt.Sprintf("%s[%s][%s]", Name, Version, id)),
+	//	logger.WithTimeLayout("2006-01-02 15:04:05"),
+	//	logger.WithFileRotationP(LogPath),
+	//)
 	logger := log.With(
-		lg,
+		//lg,
+		log.NewStdLogger(os.Stdout),
 		"caller", log.DefaultCaller,
 		"trace_id", log.TraceID(),
 		"span_id", log.SpanID(),
