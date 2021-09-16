@@ -6,7 +6,7 @@ import (
 	"github.com/go-kratos/kratos/v2/log"
 )
 
-var _ GoodRepo = (*goodRepo)(nil)
+var _ Repo = (*goodRepo)(nil)
 
 type goodRepo struct {
 	data *data.Data
@@ -17,11 +17,11 @@ func (g goodRepo) Create(ctx context.Context, id int32) error {
 	panic("implement me")
 }
 
-type GoodRepo interface {
+type Repo interface {
 	Create(ctx context.Context, id int32) error
 }
 
-func NewGoodRepo(data *data.Data, logger log.Logger) GoodRepo {
+func NewGoodRepo(data *data.Data, logger log.Logger) Repo {
 	return &goodRepo{
 		data: data,
 		log:  log.NewHelper(logger),

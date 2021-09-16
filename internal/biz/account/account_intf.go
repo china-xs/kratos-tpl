@@ -21,10 +21,10 @@ type accountLogic interface {
 type Logic struct {
 	repo     account.AccountRepo
 	log      *log.Helper
-	goodRepo good.GoodRepo
+	goodRepo good.Repo
 }
 
-func NewAccountLogic(logger log.Logger, repo account.AccountRepo, goodRepo good.GoodRepo) *Logic {
+func NewAccountLogic(logger log.Logger, repo account.AccountRepo, goodRepo good.Repo) *Logic {
 	return &Logic{
 		repo:     repo,
 		goodRepo: goodRepo,
