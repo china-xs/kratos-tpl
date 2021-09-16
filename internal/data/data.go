@@ -1,6 +1,7 @@
 package data
 
 import (
+	"context"
 	"github.com/china-xs/kratos-tpl/internal/conf"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-redis/redis/extra/redisotel"
@@ -11,20 +12,12 @@ import (
 	"time"
 )
 
-// ProviderSet is data providers.
-// 数据库 New方法必须在这里注册
-//var ProviderSet = wire.NewSet(
-//	NewData,
-//	NewAccountRepo,
-//	good.NewGoodRepo,
-//)
-
-// Data .
+// Data init
 type Data struct {
-	DB  *gorm.DB
-	RDB *redis.Client
+	//TODO wrapped database client
 	Log log.Helper
-	// TODO wrapped database client
+	db  *gorm.DB
+	rdb *redis.Client
 }
 
 // NewData .
@@ -56,10 +49,31 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 	rdb := redis.NewClient(&redisOps)
 	//redis tracing
 	rdb.AddHook(redisotel.TracingHook{})
-
 	return &Data{
-		DB:  db,
-		RDB: rdb,
+		db:  db,
+		rdb: rdb,
 		Log: *log.NewHelper(logger),
 	}, cleanup, nil
+}
+
+type Dao interface {
+	i()
+	GetDb(ctx context.Context) *gorm.DB
+	GetRdb(ctx context.Context) *redis.Client
+	GetLog(ctx context.Context) *log.Helper
+}
+
+func (this Data) GetDb(ctx context.Context) *gorm.DB {
+	return this.db
+}
+func (this Data) GetRdb(ctx context.Context) *redis.Client {
+	return this.rdb.WithContext(ctx)
+}
+
+func (this Data) GetLog(ctx context.Context) *log.Helper {
+	return this.Log.WithContext(ctx)
+}
+
+func (this Data) i() {
+
 }
