@@ -15,7 +15,7 @@ import (
 // Data init
 type Data struct {
 	//TODO wrapped database client
-	Log log.Helper
+	log log.Helper
 	db  *gorm.DB
 	rdb *redis.Client
 }
@@ -52,7 +52,7 @@ func NewData(c *conf.Data, logger log.Logger) (*Data, func(), error) {
 	return &Data{
 		db:  db,
 		rdb: rdb,
-		Log: *log.NewHelper(logger),
+		log: *log.NewHelper(logger),
 	}, cleanup, nil
 }
 
@@ -71,7 +71,7 @@ func (this Data) GetRdb(ctx context.Context) *redis.Client {
 }
 
 func (this Data) GetLog(ctx context.Context) *log.Helper {
-	return this.Log.WithContext(ctx)
+	return this.log.WithContext(ctx)
 }
 
 func (this Data) i() {
