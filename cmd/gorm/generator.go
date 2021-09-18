@@ -12,10 +12,10 @@ import (
 
 const (
 	host   = "127.0.0.1"
-	user   = "prod"
-	pwd    = "Prodc959ed5e61ce4451803Enbrands"
-	port   = 3308
-	dbname = "yjf_scrm"
+	user   = "***"
+	pwd    = "***"
+	port   = 3306
+	dbname = "db_username"
 	preFix = "u_"
 )
 
@@ -35,7 +35,7 @@ func main() {
 	)
 	config := gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
-			TablePrefix:   "u_",
+			TablePrefix:   preFix,
 			SingularTable: true,
 		},
 		NowFunc: func() time.Time {
@@ -51,12 +51,7 @@ func main() {
 	g.UseDB(db)
 	// 所有需要实现查询方法的结构体 增加表不能把原来表删除
 	g.ApplyBasic(
-		//g.GenerateModel(
-		//	"u_join",
-		//	//gen.FieldIgnore("create_at"),
-		//	gen.FieldIgnore("update_at"),
-		//),
-		g.GenerateModel("u_account"),
+		g.GenerateModel("table_name"),
 	)
 
 	// 为指定的数据库表实现除基础方法外的相关方法
