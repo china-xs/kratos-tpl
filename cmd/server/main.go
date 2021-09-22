@@ -8,6 +8,10 @@ import (
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"os"
 
+	registry2 "git.dev.enbrands.com/scrm/bed/scrm/pkg/registry"
+	"github.com/go-kratos/kratos/v2/registry"
+	"github.com/nacos-group/nacos-sdk-go/common/constant"
+
 	"github.com/china-xs/kratos-tpl/internal/conf"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
@@ -34,7 +38,7 @@ func init() {
 	flag.StringVar(&flagconf, "conf", "../../configs", "config path, eg: -conf config.yaml")
 }
 
-func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server) *kratos.App {
+func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, r registry.Registrar) *kratos.App {
 	return kratos.New(
 		kratos.ID(id),
 		kratos.Name(Name),
@@ -45,6 +49,7 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server) *kratos.App {
 			hs,
 			gs,
 		),
+		kratos.Registrar(r),
 	)
 }
 
@@ -94,7 +99,29 @@ func main() {
 		panic(err)
 	}
 
-	app, cleanup, err := initApp(bc.Server, bc.Data, logger)
+	//服务发现参数
+	rc := &registry2.RegistryConf{
+		Sc: []constant.ServerConfig{
+			*constant.NewServerConfig(
+				bc.Registry.Nacos.Address,
+				bc.Registry.Nacos.Port,
+				constant.WithScheme(bc.Registry.Nacos.Scheme),
+				constant.WithContextPath(bc.Registry.Nacos.Path),
+			),
+		},
+		Cc: &constant.ClientConfig{
+			NamespaceId:         bc.Registry.Nacos.Config.NamespaceId, //namespace id
+			TimeoutMs:           bc.Registry.Nacos.Config.TimeoutMs,
+			NotLoadCacheAtStart: bc.Registry.Nacos.Config.NotLoadCacheAtStart,
+			LogDir:              bc.Registry.Nacos.Config.LogDir,
+			CacheDir:            bc.Registry.Nacos.Config.CacheDir,
+			RotateTime:          bc.Registry.Nacos.Config.RotateTime,
+			MaxAge:              bc.Registry.Nacos.Config.MaxAge,
+			LogLevel:            bc.Registry.Nacos.Config.LogLevel,
+		},
+	}
+
+	app, cleanup, err := initApp(bc.Server, bc.Data, rc, logger)
 	if err != nil {
 		panic(err)
 	}

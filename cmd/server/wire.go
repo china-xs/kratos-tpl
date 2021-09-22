@@ -6,6 +6,7 @@ package main
 
 import (
 	// provider
+	"git.dev.enbrands.com/scrm/bed/scrm/pkg/registry"
 	pd_biz "github.com/china-xs/kratos-tpl/internal/biz/provider"
 	"github.com/china-xs/kratos-tpl/internal/conf"
 	pd_data "github.com/china-xs/kratos-tpl/internal/data/provider"
@@ -17,7 +18,7 @@ import (
 )
 
 // initApp init kratos application.
-func initApp(*conf.Server, *conf.Data, log.Logger) (*kratos.App, func(), error) {
+func initApp(*conf.Server, *conf.Data, *registry.RegistryConf, log.Logger) (*kratos.App, func(), error) {
 	panic(wire.Build(
 		pd_srv.Set,
 		pd_data.Set,

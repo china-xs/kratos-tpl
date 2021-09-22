@@ -8,6 +8,8 @@ import "google/protobuf/duration.proto";
 message Bootstrap {
   Server server = 1;
   Data data = 2;
+  Registry registry = 3;
+
 }
 
 message Server {
@@ -43,4 +45,26 @@ message Data {
   }
   Database database = 1;
   Redis redis = 2;
+}
+
+
+message Registry {
+  message Nacos {
+    message ClientConfig {
+      string namespace_id = 1;
+      uint64 timeout_ms = 2;
+      bool not_load_cache_at_start = 3;
+      string log_dir = 4;
+      string cache_dir = 5;
+      string rotate_time = 6;
+      int64 max_age = 7;
+      string log_level = 8;
+    }
+    string address = 1;
+    uint64 port = 2;
+    string scheme = 3;
+    string path = 4;
+    ClientConfig config = 5;
+  }
+  Nacos nacos = 1;
 }
