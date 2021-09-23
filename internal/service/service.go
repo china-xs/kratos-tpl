@@ -24,7 +24,7 @@ func NewAppService(
 		HS: []ServHTTPHandler{},
 		//gpc 接口注册处s
 		GS: []ServGRPCHandler{
-			demo.RegisterDemoServer(srv, service),
+			func(srv *grpc.Server) { demo.RegisterDemoServer(srv, service) },
 		},
 	}
 	return &app
