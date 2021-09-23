@@ -12,6 +12,7 @@ import (
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/nacos-group/nacos-sdk-go/common/constant"
 
+	"git.dev.enbrands.com/scrm/bed/scrm/pkg/logger"
 	"github.com/china-xs/kratos-tpl/internal/conf"
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"
@@ -56,16 +57,15 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, r registry.Regi
 func main() {
 	flag.Parse()
 	//zap 实现kratos logs Logger
-	//lg := logger.NewJSONLogger(
-	//	logger.WithDisableConsole(),
-	//	logger.WithField("domain", fmt.Sprintf("%s[%s][%s]", Name, Version, id)),
-	//	logger.WithTimeLayout("2006-01-02 15:04:05"),
-	//	logger.WithFileRotationP(LogPath),
-	//)
+	lg := logger.NewJSONLogger(
+		logger.WithDisableConsole(),
+		logger.WithField("domain", fmt.Sprintf("%s[%s][%s]", Name, Version, id)),
+		logger.WithTimeLayout("2006-01-02 15:04:05"),
+		logger.WithFileRotationP(LogPath),
+	)
 	logger := log.With(
-		//lg,
-		log.NewStdLogger(os.Stdout),
-		"caller", log.DefaultCaller,
+		lg,
+		"caller", log.Caller(4),
 		"trace_id", log.TraceID(),
 		"span_id", log.SpanID(),
 	)

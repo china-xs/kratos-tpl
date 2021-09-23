@@ -8,4 +8,5 @@ import (
 // ProviderSet is service providers.
 var Set = wire.NewSet(
 	service.NewAppService,
+	service.NewDemoService,
 )
