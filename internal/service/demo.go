@@ -4,7 +4,6 @@ import (
 	"context"
 	"github.com/china-xs/kratos-tpl/internal/biz/demologic"
 
-	//"git.dev.enbrands.com/scrm/bed/scrm/app/order/internal/biz/demologic"
 	"github.com/go-kratos/kratos/v2/log"
 
 	pb "git.dev.enbrands.com/scrm/bed/scrm/api/demo"
