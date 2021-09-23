@@ -13,6 +13,7 @@ import (
 	pd_srv "github.com/china-xs/kratos-tpl/internal/server"
 	pd_svc "github.com/china-xs/kratos-tpl/internal/service/provider"
 
+	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/google/wire"
 )

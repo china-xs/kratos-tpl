@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/sdk/resource"
 	traceSDK "go.opentelemetry.io/otel/sdk/trace"
@@ -25,7 +26,7 @@ import (
 // go build -ldflags "-X main.Version=x.y.z"
 var (
 	// Name is the name of the compiled software.
-	Name = "微服务-单体tpl"
+	Name = "tpl" //服务名称不可以使用中文
 	// Version is the version of the compiled software.
 	Version = "0.0.0.1"
 	// flagconf is the config flag.
