@@ -19,6 +19,7 @@ import (
 	"github.com/go-kratos/kratos/v2/config"
 	"github.com/go-kratos/kratos/v2/config/file"
 	"github.com/go-kratos/kratos/v2/log"
+	"github.com/go-kratos/kratos/v2/middleware/tracing"
 	"github.com/go-kratos/kratos/v2/transport/grpc"
 	"github.com/go-kratos/kratos/v2/transport/http"
 )
@@ -62,14 +63,12 @@ func main() {
 		logger.WithDisableConsole(),
 		logger.WithField("domain", fmt.Sprintf("%s[%s][%s]", Name, Version, id)),
 		logger.WithTimeLayout("2006-01-02 15:04:05"),
-		logger.WithFileRotationP(LogPath),
+		logger.WithFileRotationP("/tmp/logs/", "app.log"),
 	)
-	logger := log.With(
-		lg,
-		"caller", log.Caller(4),
-		"trace_id", log.TraceID(),
-		"span_id", log.SpanID(),
-	)
+	logger := log.With(lg)
+	logger = log.With(logger, "trace_id", tracing.TraceID())
+	logger = log.With(logger, "span_id", tracing.SpanID())
+
 	c := config.New(
 		config.WithSource(
 			file.NewSource(flagconf),

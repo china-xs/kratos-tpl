@@ -7,8 +7,8 @@ import (
 	"git.dev.enbrands.com/scrm/bed/scrm/api/demo"
 )
 
-type ServHTTPHandler func(serv *http.Server)
-type ServGRPCHandler func(serv *grpc.Server)
+type ServHTTPHandler func(srv *http.Server)
+type ServGRPCHandler func(srv *grpc.Server)
 type AppService struct {
 	HS []ServHTTPHandler
 	GS []ServGRPCHandler

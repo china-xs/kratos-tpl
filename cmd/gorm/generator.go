@@ -24,7 +24,7 @@ func main() {
 	//gen.WithoutContext 不强制使用ctx 调用方法需要自带WithContext(ctx)
 	g := gen.NewGenerator(gen.Config{
 		OutPath: "../../internal/data/dao/query",
-		Mode:    gen.WithoutContext, //不限制上下文使用
+		//Mode:    gen.WithoutContext, //不限制上下文使用,实际业务必须强制上下文
 	})
 	dsn := fmt.Sprintf("%s:%s@(%s:%d)/%s?charset=utf8mb4&parseTime=true&loc=Local",
 		user,
