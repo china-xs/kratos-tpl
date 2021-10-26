@@ -25,6 +25,12 @@ message Server {
   }
   HTTP http = 1;
   GRPC grpc = 2;
+  Log log = 3;
+  message Log {
+    string filePath = 1;// 文件路径 ep: /tmp/logs/
+    string fileName = 2;// 日志文件名称 ep: app.log
+    string timeLayout = 3;// 日志记录时间格式 ep: 2006-01-02 15:04:05
+  }
 }
 
 message Data {

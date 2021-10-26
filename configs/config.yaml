@@ -5,6 +5,10 @@ server:
   grpc:
     addr: 0.0.0.0:9000
     timeout: 1s
+  log:
+    filePath: /tmp/logs/
+    fileName: app.log
+    timeLayout: 2006-01-02 15:04:05
 data:
   database:
     driver: mysql

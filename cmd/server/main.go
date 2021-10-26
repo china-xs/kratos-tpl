@@ -8,6 +8,7 @@ import (
 	traceSDK "go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 	"os"
+	"time"
 
 	registry2 "git.dev.enbrands.com/scrm/bed/scrm/pkg/registry"
 	"github.com/go-kratos/kratos/v2/registry"
@@ -58,17 +59,6 @@ func newApp(logger log.Logger, hs *http.Server, gs *grpc.Server, r registry.Regi
 
 func main() {
 	flag.Parse()
-	//zap 实现kratos logs Logger
-	lg := logger.NewJSONLogger(
-		logger.WithDisableConsole(),
-		logger.WithField("domain", fmt.Sprintf("%s[%s][%s]", Name, Version, id)),
-		logger.WithTimeLayout("2006-01-02 15:04:05"),
-		logger.WithFileRotationP("/tmp/logs/", "app.log"),
-	)
-	logger := log.With(lg)
-	logger = log.With(logger, "trace_id", tracing.TraceID())
-	logger = log.With(logger, "span_id", tracing.SpanID())
-
 	c := config.New(
 		config.WithSource(
 			file.NewSource(flagconf),
@@ -77,7 +67,31 @@ func main() {
 	if err := c.Load(); err != nil {
 		panic(err)
 	}
+	var bc conf.Bootstrap
+	if err := c.Scan(&bc); err != nil {
+		panic(err)
+	}
+	var filePath, fileName, timeLayout string = "/tmp/logs/", "app.log", time.RFC3339
+	if bc.GetServer().GetLog().GetTimeLayout() != "" {
+		timeLayout = bc.GetServer().GetLog().GetTimeLayout()
+	}
+	if bc.GetServer().GetLog().GetFilePath() != "" {
+		filePath = bc.GetServer().GetLog().GetFilePath()
+	}
+	if bc.GetServer().GetLog().GetFileName() != "" {
+		fileName = bc.GetServer().GetLog().GetFileName()
+	}
 
+	//zap 实现kratos logs Logger
+	lg := logger.NewJSONLogger(
+		logger.WithDisableConsole(),
+		logger.WithField("domain", fmt.Sprintf("%s[%s][%s]", Name, Version, id)),
+		logger.WithTimeLayout(timeLayout),
+		logger.WithFileRotationP(filePath, fileName),
+	)
+	logger := log.With(lg)
+	logger = log.With(logger, "trace_id", tracing.TraceID())
+	logger = log.With(logger, "span_id", tracing.SpanID())
 	/*
 		//trace jaeger 链路追踪
 		exp, err := jaeger.New(jaeger.WithCollectorEndpoint(jaeger.WithEndpoint(bc.Trace.Endpoint)))
@@ -93,11 +107,6 @@ func main() {
 	)
 	//Tracer 全局注册
 	otel.SetTracerProvider(tp)
-
-	var bc conf.Bootstrap
-	if err := c.Scan(&bc); err != nil {
-		panic(err)
-	}
 
 	//服务发现参数
 	rc := &registry2.RegistryConf{
